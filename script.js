@@ -2,14 +2,12 @@
 let myLibrary = [];
 
 // Object and constructor variables
-class Book {
-constructor(title, author, pages) {
+function Book(title, author, pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        
-    }
-}
+        }
+
     
 // Test book
 const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
@@ -63,6 +61,10 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
           submit.addEventListener('click', addBookToLibrary);
           formBook.appendChild(submit);
     }
+        // function to validation form
+    
+    
+
     // Display the library
 
     function displayLibrary() {
@@ -71,24 +73,36 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
 
         //My library is looped, table created and text content taken from the constructors
         myLibrary.forEach((book, index) => {
-            const bookPanel = document.createElement('table');
-            bookPanel.classList.add('book');
-            bookPanel.dataset.index = index;
-            container.appendChild(bookPanel);
+            const bookTable = document.createElement('table');
+            bookTable.classList.add('book');
+            bookTable.dataset.index = index;
+            container.appendChild(bookTable);
 
             const titleText = document.createElement('h3');
             titleText.textContent = book.title;
-            bookPanel.appendChild(titleText);
+            bookTable.appendChild(titleText);
             
             const authorText = document.createElement('p');
             authorText.textContent = book.author;
-            bookPanel.appendChild(authorText);
+            bookTable.appendChild(authorText);
 
             const pages = document.createElement('p');
             pages.textContent = book.pages;
-            bookPanel.appendChild(pages);
+            bookTable.appendChild(pages);
 
+            const removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.addEventListener('click', removeBook )
+            bookTable.appendChild(removeButton);
         })
     }
 
+    
+// Button to remove the book from the library
+    function removeBook(event) {
+        const button = event.target;
+        const libraryIndex = button.parentElement.dataset.index;
+        myLibrary.splice(libraryIndex, 1);
+        displayLibrary();
+    }
         
