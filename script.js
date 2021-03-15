@@ -2,11 +2,13 @@
 let myLibrary = [];
 
 // Object and constructor variables
-function Book(title, author, pages, read) {
+class book {
+constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.read = read;
+        
         }
 //Add method to book prototype
 
