@@ -2,31 +2,40 @@
 let myLibrary = [];
 
 // Object and constructor variables
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
+        this.read = read;
         }
+//Add method to book prototype
 
+Book.prototype.toggleRead = function() {
+    // code here
+}
     
 // Test book
-const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
+const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages', true)
     myLibrary.push(theHobbit);
     
 // Pushes object data to myLibary Array
-    function addBookToLibrary(event) {
+    
+function addBookToLibrary(event) {
         event.preventDefault();
         const title = document.getElementById('title').value;
         const author = document.getElementById('author').value;
         const pages = document.getElementById('pages').value;
-        let newBook = new Book(title, author, pages);
+        const read = document.querySelector('#read').checked
+        let newBook = new Book(title, author, pages, read);
         myLibrary.push(newBook);
         displayLibrary();
       }
-    
+
+
     //Display the form, function is called from HTML 'add book' button
 
     function displayForm() {
+        
         const formDiv= document.querySelector('#form_container');
 
         const formBook = document.createElement('form');
@@ -39,7 +48,7 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
             label.htmlFor = id;
             label.textContent = labelText;
             formBook.appendChild(label);
-          
+            
             const input = document.createElement('input');
             input.type = type;
             input.id = id;
@@ -53,6 +62,7 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
           appendInput("text", "title", "Title:", );
           appendInput("text", "author", "Author:", );
           appendInput("number", "pages", "# of pages:",);
+          appendInput("checkbox", "read", "Read",);
           
         //Submit button of form 
           const submit = document.createElement('button');
@@ -60,7 +70,8 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
           submit.textContent = 'Submit';
           submit.addEventListener('click', addBookToLibrary);
           formBook.appendChild(submit);
-    }
+        }
+    
         // function to validation form
     
     
@@ -73,7 +84,7 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
 
         //My library is looped, table created and text content taken from the constructors
         myLibrary.forEach((book, index) => {
-            const bookTable = document.createElement('table');
+            const bookTable = document.createElement('div');
             bookTable.classList.add('book');
             bookTable.dataset.index = index;
             container.appendChild(bookTable);
@@ -89,6 +100,10 @@ const theHobbit = new Book('The Hobbit','J.R.R. Tolkien','295 pages')
             const pages = document.createElement('p');
             pages.textContent = book.pages;
             bookTable.appendChild(pages);
+
+            const readText = document.createElement('p');
+            readText.textContent = book.read;
+            bookTable.appendChild(readText);
 
             const removeButton = document.createElement('button');
             removeButton.textContent = "Remove";
