@@ -94,6 +94,11 @@ function displayLibrary() {
     readText.textContent = book.read;
     bookTable.appendChild(readText);
 
+    const removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.addEventListener('click', removeBook )
+            bookTable.appendChild(removeButton);
+
   });
 }
 
