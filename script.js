@@ -9,7 +9,7 @@ function book(title, author, pages) {
   //this.read = read;
 }
 
-const theHobbit = new book ('test', 'test', 'test');
+const theHobbit = new book("test", "test", "test");
 myLibrary.push(theHobbit);
 // Pushes object data to myLibary Array
 
@@ -61,9 +61,30 @@ function displayForm() {
   submit.textContent = "Submit";
   submit.addEventListener("click", addBookToLibrary);
   formBook.appendChild(submit);
+
+  // function to validation form
+
+const title = document.getElementById('title');
+
+title.addEventListener('input', function(event) {
+  if (title.validity.typeMismatch) {
+    title.setCustomValidity("Please enter a valid title");
+  } else {
+    title.setCustomValidity("");
+  }
+});
+
+const pages = document.getElementById('pages');
+
+pages.addEventListener('input', function(event) {
+  if (title.validity.typeMismatch) {
+    title.setCustomValidity("Please input number of pages read");
+  } else {
+    pages.setCustomValidity("");
+  }
+});
 }
 
-// function to validation form
 
 // Display the library
 
@@ -94,11 +115,10 @@ function displayLibrary() {
     readText.textContent = book.read;
     bookTable.appendChild(readText);
 
-    const removeButton = document.createElement('button');
-            removeButton.textContent = "Remove";
-            removeButton.addEventListener('click', removeBook )
-            bookTable.appendChild(removeButton);
-
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", removeBook);
+    bookTable.appendChild(removeButton);
   });
 }
 
